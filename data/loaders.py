@@ -18,9 +18,9 @@ def load_documents(folder_path="data/documents"):
     return documents
 
 
-# testing document loader
-if __name__ == "__main__":
-    docs = load_documents()
-    print(f"Found and loaded {len(docs)} documents from the directory")
-    for doc in docs:
-        print(doc[:10])  # print the first 10 characters in each document
+# # testing document loader
+# if __name__ == "__main__":
+#     docs = load_documents()
+#     print(f"Found and loaded {len(docs)} documents from the directory")
+#     for doc in docs:
+#         print(doc[:10])  # print the first 10 characters in each document
