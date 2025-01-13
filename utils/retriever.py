@@ -1,7 +1,5 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import sys
-import os
 
 # Global variables for vectorizer and document cache
 tfidf_vectorizer = TfidfVectorizer()
@@ -12,8 +10,11 @@ def retrieve_documents(query, documents=None):
     """Retrieves the most relevant documents for a given query."""
     global document_cache
 
-    # Load documents if not provided or not cached
     if not documents:
+        return []
+
+    # Load documents if not provided or not cached
+    if documents is None:
         from data.loaders import load_documents
 
         documents = load_documents()
@@ -34,16 +35,19 @@ def retrieve_documents(query, documents=None):
 
 
 # Testing the retriever
-if __name__ == "__main__":
-    # Add the parent directory to the sys.path
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-    # print(sys.path)
+# import sys
+# import os
 
-    from data.loaders import load_documents
+# if __name__ == "__main__":
+#     # Add the parent directory to the sys.path
+#     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+#     # print(sys.path)
 
-    docs = load_documents()
-    query = "Friends"
-    results = retrieve_documents(query, docs)
-    print("Top documents for you query:")
-    for result in results:
-        print(result[:30])
+#     from data.loaders import load_documents
+
+#     docs = load_documents()
+#     query = "Friends"
+#     results = retrieve_documents(query, docs)
+#     print("Top documents for you query:")
+#     for result in results:
+#         print(result[:30])
