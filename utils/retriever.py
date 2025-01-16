@@ -10,14 +10,14 @@ def retrieve_documents(query, documents=None):
     """Retrieves the most relevant documents for a given query."""
     global document_cache
 
-    if not documents:
-        return []
-
     # Load documents if not provided or not cached
     if documents is None:
         from data.loaders import load_documents
 
         documents = load_documents()
+
+    if not documents:
+        return []
 
     if not document_cache:  # Cache documents if not already done
         document_cache = documents

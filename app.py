@@ -8,7 +8,7 @@ def create_app():
     """
     app = Flask(__name__)
 
-    # Registering blueprints
+    # Registering blueprint created in routes/api.py
     app.register_blueprint(api_routes, url_prefix="/api")
 
     return app
