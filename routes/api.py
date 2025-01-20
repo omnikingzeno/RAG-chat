@@ -27,7 +27,7 @@ def chat():
         return jsonify({"error": "Both, message and session id are required"}), 400
 
     history = session_history.get(session_id, [])
-    print(history)
+    # print(history)
     conversation_history = [
         {"role": "user" if i % 2 == 0 else "assistant", "content": h.split(":", 1)[1]}
         for i, h in enumerate(history)

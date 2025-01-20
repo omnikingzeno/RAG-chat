@@ -24,7 +24,9 @@ def generate_response(query, documents, conversation_history=None):
         return f"Sorry, I could not find any documents related to your query: {query}"
 
     # construct context from documents
-    context = "\n\n.join([f'Document {i} : \n {doc} \n\n' for i, doc in enumerate(documents, 1)])"
+    context = "\n\n".join(
+        [f"Document {i} : \n {doc} \n\n" for i, doc in enumerate(documents, 1)]
+    )
 
     # Build the messages list
     messages = [{"role": "system", "content": "You are a helpful assistant."}]
@@ -32,7 +34,7 @@ def generate_response(query, documents, conversation_history=None):
         messages.extend(conversation_history)
     messages.append({"role": "user", "content": f"{query}\n\nContext:\n{context}"})
 
-    print(messages)
+    # print(messages)
 
     # API request payload
     payload = {"model": "codestral-latest", "messages": messages}
