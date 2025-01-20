@@ -27,13 +27,16 @@ def chat():
         return jsonify({"error": "Both, message and session id are required"}), 400
 
     history = session_history.get(session_id, [])
+    print(history)
+    conversation_history = [
+        {"role": "user" if i % 2 == 0 else "assistant", "content": h.split(":", 1)[1]}
+        for i, h in enumerate(history)
+    ]
+
     documents = retrieve_documents(user_input)
 
-    # join query with history
-    history_text = "\n".join(history)
-    enhanced_query = f"{history_text}\n{user_input}" if history_text else user_input
-
-    response = generate_response(enhanced_query, documents)
+    # Generate response with LLM
+    response = generate_response(user_input, documents, conversation_history)
 
     # update session history
     history.append(f"User: {user_input}")
