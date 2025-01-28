@@ -40,7 +40,7 @@ def generate_embeddings(texts):
 
 
 def embed_single_text(text):
-    """ "
+    """
     Generate embeddings for a single text using Jina AI API
 
     Parameters:
