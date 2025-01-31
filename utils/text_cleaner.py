@@ -1,42 +1,52 @@
-import re
-from typing import List
-from langchain_text_splitters import RecursiveCharacterTextSplitter 
+from unstructured.documents.elements import Element
+from unstructured.cleaners.core import (
+    clean_non_ascii_chars,
+    clean_extra_whitespace,
+    replace_unicode_quotes,
+    remove_punctuation,
+)
 
 
-def clean_text(text: str):
-    """Clean text by removing special characters, spaces, latex-style equations, and multiple newlines.
-    Args:
-        text (str): The text to clean.
-    Returns:
-        str: The cleaned text."""
+def clean_pdf_elements(elements):
+    """Filter headers/footers and clean text in each element"""
+    cleaned_elements = []
 
-    text = re.sub(r"\n+", "\n", text)
-    text = re.sub(r"\$\$.*?\$\$", "", text)
-    text = re.sub(r"\$.*?\$", "", text)
-    text = re.sub(r"\s+", " ", text)
-    text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
-    return text
+    # Filter out headers/footers using metadata
+    for elem in elements:
+        if elem.category in ("Header", "Footer"):
+            continue
+
+        # Clean text while preserving element type
+        text = elem.text
+        text = clean_non_ascii_chars(text)
+        text = clean_extra_whitespace(text)
+        text = replace_unicode_quotes(text)
+        text = remove_punctuation(text)  # Optional
+
+        # Create new element with cleaned text and original metadata
+        cleaned_elem = Element()
+        cleaned_elem.text = text
+        cleaned_elem.metadata = elem.metadata
+        cleaned_elem.category = elem.category
+        cleaned_elements.append(cleaned_elem)
+
+    return cleaned_elements
 
 
-def split_text(
-    file_content: str, chunk_size: int = 1000, chunk_overlap: int = 300
-) -> List[str]:
-    """Split text into chunks of size chunk_size. Each chunk is separated by two newlines.
-    Args:
-        file_content (str): The text to split.
-        chunk_size (int): The size of each chunk.
-    Returns:
-        List[str]: The list of text chunks.
-    """
+if __name__ == "__main__":
+    # Example usage for testing
+    elements = [
+        Element(),
+        Element(),
+        Element(),
+    ]
+    elements[0].text = "Header text"
+    elements[0].category = "Header"
+    elements[1].text = "This is a sample          text."
+    elements[1].category = "Paragraph"
+    elements[2].text = "Footer text"
+    elements[2].category = "Footer"
 
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        length_function=len,
-        is_separator_regex=False,
-    )
-
-    splitted_text = []
-    for i in text_splitter.create_documents([file_content]):
-        splitted_text.append(i.page_content)
-    return splitted_text
+    cleaned_elements = clean_pdf_elements(elements)
+    for element in cleaned_elements:
+        print(element.text)
