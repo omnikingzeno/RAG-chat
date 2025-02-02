@@ -14,20 +14,20 @@ def chunk_pdf_elements(elements):
     return [chunk.text for chunk in chunks]
 
 
-if __name__ == "__main__":
-    # Example usage for testing
-    elements = [
-        Element(),
-        Element(),
-        Element(),
-    ]
-    elements[0].text = "Title 1\nThis is the first section of the document."
-    elements[0].category = "Title"
-    elements[1].text = "This is the second section of the document."
-    elements[1].category = "Paragraph"
-    elements[2].text = "Title 2\nThis is the third section of the document."
-    elements[2].category = "Title"
+# if __name__ == "__main__":
+#     # Example usage for testing
+#     elements = [
+#         Element(),
+#         Element(),
+#         Element(),
+#     ]
+#     elements[0].text = "Title 1\nThis is the first section of the document."
+#     elements[0].category = "Title"
+#     elements[1].text = "This is the second section of the document."
+#     elements[1].category = "Paragraph"
+#     elements[2].text = "Title 2\nThis is the third section of the document."
+#     elements[2].category = "Title"
 
-    chunks = chunk_pdf_elements(elements)
-    for chunk in chunks:
-        print(chunk)
+#     chunks = chunk_pdf_elements(elements)
+#     for chunk in chunks:
+#         print(chunk)

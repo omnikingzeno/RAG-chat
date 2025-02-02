@@ -33,20 +33,20 @@ def clean_pdf_elements(elements):
     return cleaned_elements
 
 
-if __name__ == "__main__":
-    # Example usage for testing
-    elements = [
-        Element(),
-        Element(),
-        Element(),
-    ]
-    elements[0].text = "Header text"
-    elements[0].category = "Header"
-    elements[1].text = "This is a sample          text."
-    elements[1].category = "Paragraph"
-    elements[2].text = "Footer text"
-    elements[2].category = "Footer"
+# if __name__ == "__main__":
+#     # Example usage for testing
+#     elements = [
+#         Element(),
+#         Element(),
+#         Element(),
+#     ]
+#     elements[0].text = "Header text"
+#     elements[0].category = "Header"
+#     elements[1].text = "This is a sample          text."
+#     elements[1].category = "Paragraph"
+#     elements[2].text = "Footer text"
+#     elements[2].category = "Footer"
 
-    cleaned_elements = clean_pdf_elements(elements)
-    for element in cleaned_elements:
-        print(element.text)
+#     cleaned_elements = clean_pdf_elements(elements)
+#     for element in cleaned_elements:
+#         print(element.text)

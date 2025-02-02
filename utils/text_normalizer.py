@@ -28,20 +28,20 @@ def normalize_pdf_elements(elements):
     return normalized_elements
 
 
-if __name__ == "__main__":
-    # Example usage for testing
-    elements = [
-        Element(),
-        Element(),
-        Element(),
-    ]
-    elements[0].text = "Header TEXT"
-    elements[0].category = "Header"
-    elements[1].text = "This is a SAMPLE text."
-    elements[1].category = "Paragraph"
-    elements[2].text = "Footer TEXT"
-    elements[2].category = "Footer"
+# if __name__ == "__main__":
+#     # Example usage for testing
+#     elements = [
+#         Element(),
+#         Element(),
+#         Element(),
+#     ]
+#     elements[0].text = "Header TEXT"
+#     elements[0].category = "Header"
+#     elements[1].text = "This is a SAMPLE text."
+#     elements[1].category = "Paragraph"
+#     elements[2].text = "Footer TEXT"
+#     elements[2].category = "Footer"
 
-    normalized_elements = normalize_pdf_elements(elements)
-    for element in normalized_elements:
-        print(element.text)
+#     normalized_elements = normalize_pdf_elements(elements)
+#     for element in normalized_elements:
+#         print(element.text)
