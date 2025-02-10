@@ -1,0 +1,33 @@
+{
+  "user_id": {
+    "type": "ObjectId",
+    "required": true
+  },
+  "email": {
+    "type": "String",
+    "required": true,
+    "unique": true
+  },
+  "password": {
+    "type": "String",
+    "required": true
+  },
+  "chats": [
+    {
+      "type": "ObjectId",
+      "ref": "Chat"
+    }
+  ],
+  "documents": [
+    {
+      "type": "ObjectId",
+      "ref": "Document"
+    }
+  ],
+  "messages": [
+    {
+      "type": "ObjectId",
+      "ref": "Message"
+    }
+  ]
+}

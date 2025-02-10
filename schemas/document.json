@@ -1,0 +1,11 @@
+{
+  "doc_id": {
+    "type": "ObjectId",
+    "required": true
+  },
+  "chat_id": {
+    "type": "ObjectId",
+    "required": true,
+    "ref": "Chat"
+  }
+}
