@@ -21,7 +21,12 @@ def extract_pdf_elements(pdf_path):
 
 # if __name__ == "__main__":
 #     # Example usage for testing
-#     pdf_path = "table.pdf"
+#     pdf_path = "Review of Endodontics and Operative Dentistry by Garg, Nisha.pdf"
 #     elements = extract_pdf_elements(pdf_path)
-#     for element in elements:
-#         print(element)
+#     # for element in elements:
+#     #     print(element)
+#     # Write the extracted text from each element to a file.
+#     with open("extracted_text.txt", "w", encoding="utf-8") as f:
+#         for element in elements:
+#             # Assuming each element has a 'text' attribute.
+#             f.write(element.text + "\n")
